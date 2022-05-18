@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/RandomlyPlacedControl/RandomlyPlacedControl.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/RandomlyPlacedControl/RandomlyPlacedControlContentTemplateSelector.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

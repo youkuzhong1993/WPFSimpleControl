@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CustomControl">
+    <DataTemplate x:Key="RPCTextBlockDataTemplate">
+        <Border Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RandomlyPlacedControl}}}">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Text}" FontSize="{Binding FontSize}"/>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RPCImageDataTemplate">
+        <Border Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RandomlyPlacedControl}}}">
+            <Image Source="{Binding ImagePath, Converter={x:Static local:XConverter.FilePathToBitmapImage}}"/>
+        </Border>
+    </DataTemplate>
+    
+    <local:RandomlyPlacedControlContentTemplateSelector x:Key="RPCContentTmeplateSelector"
+                                                        TextBlockDataTemplate="{StaticResource RPCTextBlockDataTemplate}"
+                                                        ImageDataTemplate="{StaticResource RPCImageDataTemplate}"/>
+</ResourceDictionary>
