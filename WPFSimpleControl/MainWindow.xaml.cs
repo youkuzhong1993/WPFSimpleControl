@@ -34,6 +34,11 @@ namespace WPFSimpleControl
             randomlyPlacedControlBases.Add(new RPCTextBlock());
             randomlyPlacedControlBases.Add(new RPCImage() { ImagePath = @"D:\\1.png" });
             rpc.ItemsSources = randomlyPlacedControlBases;
+
+            for(int i =0; i < 100; i++)
+            {
+                rtb.AppendText(string.Format("{0}\r\n", i));
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

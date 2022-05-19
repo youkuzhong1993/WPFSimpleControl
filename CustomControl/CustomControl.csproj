@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Converter\FilePathToBitmapImage.cs" />
     <Compile Include="Converter\XConverter.cs" />
+    <Compile Include="Help\ControlScrollHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
