@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace CustomControl
 {
-    public static class ControlScrollHelp
+    public class ControlScrollHelp
     {
         private static ScrollViewer selectedScrol = null;
         private static bool IsMouseDown = false;

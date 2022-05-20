@@ -2,7 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +29,6 @@ namespace CustomControl
         private bool IsGirdSpliterDragEnter = false;
         private Point MouseDownPoint = new Point();
         #endregion
-
 
         #region Property
         #region DisplayGrid
@@ -62,6 +63,50 @@ namespace CustomControl
             (d as RandomlyPlacedControl).RefreshView();
         }
         #endregion
+
+        #region UseableSources(可用列表)
+        public static readonly DependencyProperty UseableSourcesProperty =
+            DependencyProperty.Register("UseableSources", typeof(IList<RandomlyPlacedControlBase>), typeof(RandomlyPlacedControl), new PropertyMetadata(null));
+
+        public IList<RandomlyPlacedControlBase> UseableSources
+        {
+            get { return (IList<RandomlyPlacedControlBase>)GetValue(UseableSourcesProperty); }
+            set { SetValue(UseableSourcesProperty, value); }
+        }
+        #endregion
+
+        #region SelectedUseableItem
+        public static readonly DependencyProperty SelectedUseableItemProperty =
+            DependencyProperty.Register("SelectedUseableItem", typeof(RandomlyPlacedControlBase), typeof(RandomlyPlacedControl), new PropertyMetadata(null));
+
+        public RandomlyPlacedControlBase SelectedUseableItem
+        {
+            get { return (RandomlyPlacedControlBase)GetValue(SelectedUseableItemProperty); }
+            set { SetValue(SelectedUseableItemProperty, value); }
+        }
+        #endregion
+
+        #region IsDisplayUseablePopup
+        public static readonly DependencyProperty IsDisplayUseablePopupProperty =
+            DependencyProperty.Register("IsDisplayUseablePopup", typeof(bool), typeof(RandomlyPlacedControl), new PropertyMetadata(false));
+
+        public bool IsDisplayUseablePopup
+        {
+            get { return (bool)GetValue(IsDisplayUseablePopupProperty); }
+            set { SetValue(IsDisplayUseablePopupProperty, value); }
+        }
+        #endregion
+
+        #region UseablePopupPlacementRectangle
+        public static readonly DependencyProperty UseablePopupPlacementRectangleProperty =
+            DependencyProperty.Register("UseablePopupPlacementRectangle", typeof(Rect), typeof(RandomlyPlacedControl), new PropertyMetadata(null));
+
+        public Rect UseablePopupPlacementRectangle
+        {
+            get { return (Rect)GetValue(UseablePopupPlacementRectangleProperty); }
+            set { SetValue(UseablePopupPlacementRectangleProperty, value); }
+        }
+        #endregion
         #endregion
 
         public RandomlyPlacedControl()
@@ -70,7 +115,27 @@ namespace CustomControl
             AddHandler(GridSplitter.DragEnterEvent, new RoutedEventHandler(OnGridSpliter_DragEnter));
             AddHandler(GridSplitter.DragCompletedEvent, new RoutedEventHandler(OnGridSpliter_DragCompleted));
             AddHandler(PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(OnPreviewMouseLeftButtonDown));
+            InitUseableSources();
         }
+
+        #region InitUseableSources
+        /// <summary>
+        /// 初始可用列表
+        /// </summary>
+        private void InitUseableSources()
+        {
+            UseableSources = new ObservableCollection<RandomlyPlacedControlBase>();
+            foreach(var type in Assembly.GetAssembly(typeof(RandomlyPlacedControlBase)).GetTypes())
+            {
+                if(type.BaseType != typeof(RandomlyPlacedControlBase))
+                {
+                    continue;
+                }
+
+                UseableSources.Add(Activator.CreateInstance(type) as RandomlyPlacedControlBase);
+            }
+        }
+        #endregion
 
         #region OnRender
         protected override void OnRender(DrawingContext drawingContext)
@@ -111,13 +176,13 @@ namespace CustomControl
                     continue;
                 }
 
-                DisplayGrid.Children.Add(GetGrid(control));
+                DisplayGrid.Children.Add(GetGrid(control, new Point()));
             }
         }
         #endregion
 
         #region GetGrid
-        private Grid GetGrid(RandomlyPlacedControlBase controlBase)
+        private Grid GetGrid(RandomlyPlacedControlBase controlBase, Point point, bool isInsert = false)
         {
             if(controlBase == null)
             {
@@ -130,7 +195,8 @@ namespace CustomControl
                 && controlBase.ThirdCol == 1
                 && controlBase.FirstRow == 1
                 && controlBase.SecondRow == 1
-                && controlBase.ThirdRow == 1)
+                && controlBase.ThirdRow == 1
+                && !isInsert)
             {
                 double secondCol = Math.Min(controlBase.DefaultWidth, this.ActualWidth);
                 double col = (this.ActualWidth - secondCol) / 2;
@@ -144,7 +210,7 @@ namespace CustomControl
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(secondeRow, GridUnitType.Star) });
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(row, GridUnitType.Star) });
             }
-            else
+            else if(!isInsert)
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(controlBase.FirstCol, GridUnitType.Star) });
                 grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(controlBase.SecondCol, GridUnitType.Star) });
@@ -152,6 +218,17 @@ namespace CustomControl
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(controlBase.FirstRow, GridUnitType.Star) });
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(controlBase.SecondRow, GridUnitType.Star) });
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(controlBase.ThirdRow, GridUnitType.Star) });
+            }
+            else
+            {
+                double width = Math.Min(DisplayGrid.ActualWidth - point.X, controlBase.DefaultWidth);
+                double height = Math.Min(DisplayGrid.ActualHeight - point.Y, controlBase.DefaultHeight);
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(point.X, GridUnitType.Star) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(width, GridUnitType.Star) });
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(DisplayGrid.ActualWidth - point.X - width, GridUnitType.Star) });
+                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(point.Y, GridUnitType.Star) });
+                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(height, GridUnitType.Star) });
+                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(DisplayGrid.ActualHeight - point.Y - height, GridUnitType.Star) });
             }
 
             AddGridSpliterOnGrid(grid);
@@ -319,6 +396,8 @@ namespace CustomControl
             {
                 IsMouseDownSelctedGrid = false;
                 SelectedGrid = null;
+                SelectedUseableItem = null;
+                IsDisplayUseablePopup = false;
             }
 
             if (IsMouseDownSelctedGrid)
@@ -336,6 +415,11 @@ namespace CustomControl
 
                 MouseDownPoint = p;
             }
+            else if(SelectedUseableItem != null)
+            {
+                IsDisplayUseablePopup = true;
+                UseablePopupPlacementRectangle = new Rect(e.GetPosition(this), new Size(5, 5));
+            }            
         }
         #endregion
 
@@ -344,8 +428,31 @@ namespace CustomControl
         {
             base.OnPreviewMouseUp(e);
 
+            if(SelectedUseableItem != null
+                && IsDisplayUseablePopup)
+            {
+                Point point = e.GetPosition(DisplayGrid);
+                if(point.X >= 0
+                    && point.Y >= 0
+                    && point.X <= DisplayGrid.ActualWidth
+                    && point.Y <= DisplayGrid.ActualHeight)
+                {
+                    RandomlyPlacedControlBase randomlyPlacedControlBase = Activator.CreateInstance(SelectedUseableItem.GetType()) as RandomlyPlacedControlBase;
+                    if(ItemsSources == null)
+                    {
+                        ItemsSources = new List<RandomlyPlacedControlBase>();
+                    }
+
+                    ItemsSources.Add(randomlyPlacedControlBase);
+                    randomlyPlacedControlBase.PanelZIndex = ItemsSources.Count - 1;
+                    DisplayGrid.Children.Add(GetGrid(randomlyPlacedControlBase, point, true));
+                }
+            }
+
             IsMouseDownSelctedGrid = false;
             SelectedGrid = null;
+            SelectedUseableItem = null;
+            IsDisplayUseablePopup = false;
         }
         #endregion
     }

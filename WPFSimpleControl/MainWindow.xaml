@@ -14,8 +14,8 @@
         <StackPanel Orientation="Horizontal">
             <Button Width="80" Height="20" Click="Button_Click"/>
         </StackPanel>
-        <control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1" Visibility="Collapsed"/>
-        <RichTextBox x:Name="rtb" IsReadOnly="True"
+        <control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1"/>
+        <RichTextBox x:Name="rtb" IsReadOnly="True" Visibility="Collapsed"
                      control:ControlScrollHelp.LeftMouseButtonScrollEnabled="true" Grid.Row="1"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White"/>
     </Grid>

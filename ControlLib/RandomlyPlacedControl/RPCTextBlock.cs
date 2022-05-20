@@ -37,12 +37,12 @@
         #endregion
 
         public RPCTextBlock()
-            : base()
         {
             DefaultWidth = 90;
             DefaultHeight = 20;
             FontSize = 10;
             Text = "TextBlock";
+            ControlName = "文本框";
         }
     }
 }

@@ -55,8 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter\FilePathToBitmapImage.cs" />
+    <Compile Include="Converter\IsFirstItemInItemsControl.cs" />
     <Compile Include="Converter\XConverter.cs" />
     <Compile Include="Help\ControlScrollHelp.cs" />
+    <Compile Include="Help\ItemsControlHelp.cs" />
+    <Compile Include="MoveThumb.xaml.cs">
+      <DependentUpon>MoveThumb.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +93,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="ListViewDic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoveThumb.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RandomlyPlacedControl\RandomlyPlacedControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

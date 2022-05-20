@@ -31,8 +31,8 @@ namespace WPFSimpleControl
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            randomlyPlacedControlBases.Add(new RPCTextBlock());
-            randomlyPlacedControlBases.Add(new RPCImage() { ImagePath = @"D:\\1.png" });
+            randomlyPlacedControlBases.Add(new RPCTextBlock() { PanelZIndex = 0 });
+            randomlyPlacedControlBases.Add(new RPCImage() { ImagePath = @"D:\\1.png", PanelZIndex = 1 });
             rpc.ItemsSources = randomlyPlacedControlBases;
 
             for(int i =0; i < 100; i++)

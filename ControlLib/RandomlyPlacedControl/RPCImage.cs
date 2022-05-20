@@ -21,11 +21,11 @@
         #endregion
 
         public RPCImage()
-            : base()
         {
             DefaultWidth = 300;
             DefaultHeight = 300;
             ImagePath = "";
+            ControlName = "图标";
         }
     }
 }

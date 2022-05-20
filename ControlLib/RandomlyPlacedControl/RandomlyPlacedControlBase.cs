@@ -53,6 +53,22 @@ namespace ControlLib.RandomlyPlacedControl
             }
         }
         #endregion
+
+        #region ControlName
+        private string _controlName;
+        /// <summary>
+        /// 控件名称
+        /// </summary>
+        public string ControlName
+        {
+            get { return _controlName; }
+            set
+            {
+                _controlName = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
         #endregion
 
         public RandomlyPlacedControlBase()

@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:CustomControl">
     <Style TargetType="{x:Type local:RandomlyPlacedControl}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="#AAAAAA"/>
         <Setter Property="Background" Value="White"/><!--不设置点击事件不触发，改hook忽略-->
@@ -17,6 +18,29 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" Width="120">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                          local:ItemsControlHelp.FirstItemMargin="10,4" local:ItemsControlHelp.ItemMargin="10,0,10,4"
+                                          local:ItemsControlHelp.ItemHeight="28" local:ItemsControlHelp.ItemBorderCornerRadius="4"
+                                          local:ItemsControlHelp.ItemBorderThickness="0.6" local:ItemsControlHelp.ItemBorderBrush="{TemplateBinding BorderBrush}"
+                                          local:ItemsControlHelp.IsItemClickToSelected="True"
+                                          ItemsSource="{TemplateBinding UseableSources}"
+                                          SelectedItem="{Binding SelectedUseableItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ControlName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <Popup Placement="RelativePoint" IsOpen="{TemplateBinding IsDisplayUseablePopup}" PlacementRectangle="{TemplateBinding UseablePopupPlacementRectangle}">
+                                    <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Width="5" Height="5"/>
+                                </Popup>
+                            </Grid>
+                            
                             <ContentPresenter Grid.Column="1" Content="{TemplateBinding DisplayGrid}"/>
                         </Grid>
                     </Border>

@@ -26,5 +26,11 @@ namespace CustomControl
         {
             get { return Singleton<FilePathToBitmapImage>.GetInstance(); }
         }
+
+        public static IsFirstItemInItemsControl IsFirstItemInItemsControl
+        {
+            get { return Singleton<IsFirstItemInItemsControl>.GetInstance(); }
+        }
+        
     }
 }
