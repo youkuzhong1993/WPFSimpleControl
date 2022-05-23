@@ -16,7 +16,7 @@
         </StackPanel>
         <control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1"/>
         <RichTextBox x:Name="rtb" IsReadOnly="True" Visibility="Collapsed"
-                     control:ControlScrollHelp.LeftMouseButtonScrollEnabled="true" Grid.Row="1"
+                     control:ControlScrollAttachedProperty.LeftMouseButtonScrollEnabled="true" Grid.Row="1"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White"/>
     </Grid>
 </Window>

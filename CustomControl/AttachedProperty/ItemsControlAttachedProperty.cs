@@ -4,11 +4,11 @@ using System.Windows.Media;
 
 namespace CustomControl
 {
-    public class ItemsControlHelp
+    public class ItemsControlAttachedProperty
     {
         #region ItemSelectedBrush
         public static readonly DependencyProperty ItemSelectedBrushProperty =
-            DependencyProperty.RegisterAttached("ItemSelectedBrush", typeof(Brush), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(Brushes.Transparent));
+            DependencyProperty.RegisterAttached("ItemSelectedBrush", typeof(Brush), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(Brushes.Transparent));
 
         public static Brush GetItemSelectedBrush(DependencyObject d)
         {
@@ -23,7 +23,7 @@ namespace CustomControl
 
         #region FirstItemMargin
         public static readonly DependencyProperty FirstItemMarginProperty =
-            DependencyProperty.RegisterAttached("FirstItemMargin", typeof(Thickness), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached("FirstItemMargin", typeof(Thickness), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(new Thickness(0)));
 
         public static Thickness GetFirstItemMargin(DependencyObject d)
         {
@@ -38,7 +38,7 @@ namespace CustomControl
 
         #region ItemMargin
         public static readonly DependencyProperty ItemMarginProperty =
-            DependencyProperty.RegisterAttached("ItemMargin", typeof(Thickness), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached("ItemMargin", typeof(Thickness), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(new Thickness(0)));
 
         public static Thickness GetItemMargin(DependencyObject d)
         {
@@ -53,7 +53,7 @@ namespace CustomControl
 
         #region ItemHeight
         public static readonly DependencyProperty ItemHeightProperty =
-            DependencyProperty.RegisterAttached("ItemHeight", typeof(double), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(double.NaN));
+            DependencyProperty.RegisterAttached("ItemHeight", typeof(double), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(double.NaN));
 
         public static double GetItemHeight(DependencyObject d)
         {
@@ -68,7 +68,7 @@ namespace CustomControl
 
         #region ItemWidth
         public static readonly DependencyProperty ItemWidthProperty =
-            DependencyProperty.RegisterAttached("ItemWidth", typeof(double), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(double.NaN));
+            DependencyProperty.RegisterAttached("ItemWidth", typeof(double), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(double.NaN));
 
         public static double GetItemWidth(DependencyObject d)
         {
@@ -83,7 +83,7 @@ namespace CustomControl
 
         #region ItemBorderThickness
         public static readonly DependencyProperty ItemBorderThicknessProperty =
-            DependencyProperty.RegisterAttached("ItemBorderThickness", typeof(Thickness), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(new Thickness(0)));
+            DependencyProperty.RegisterAttached("ItemBorderThickness", typeof(Thickness), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(new Thickness(0)));
 
         public static Thickness GetItemBorderThickness(DependencyObject d)
         {
@@ -98,7 +98,7 @@ namespace CustomControl
 
         #region ItemBorderBrush
         public static readonly DependencyProperty ItemBorderBrushProperty =
-            DependencyProperty.RegisterAttached("ItemBorderBrush", typeof(Brush), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(Brushes.Transparent));
+            DependencyProperty.RegisterAttached("ItemBorderBrush", typeof(Brush), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(Brushes.Transparent));
 
         public static Brush GetItemBorderBrush(DependencyObject d)
         {
@@ -113,7 +113,7 @@ namespace CustomControl
 
         #region ItemBorderCornerRadius
         public static readonly DependencyProperty ItemBorderCornerRadiusProperty =
-            DependencyProperty.RegisterAttached("ItemBorderCornerRadius", typeof(CornerRadius), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(new CornerRadius(0)));
+            DependencyProperty.RegisterAttached("ItemBorderCornerRadius", typeof(CornerRadius), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(new CornerRadius(0)));
 
         public static CornerRadius GetItemBorderCornerRadius(DependencyObject d)
         {
@@ -128,7 +128,7 @@ namespace CustomControl
 
         #region IsItemClickToSelected(当被点击即选)
         public static readonly DependencyProperty IsItemClickToSelectedProperty =
-            DependencyProperty.RegisterAttached("IsItemClickToSelected", typeof(bool), typeof(ItemsControlHelp), new FrameworkPropertyMetadata(false, OnIsItemClickToSelectedChanged));
+            DependencyProperty.RegisterAttached("IsItemClickToSelected", typeof(bool), typeof(ItemsControlAttachedProperty), new FrameworkPropertyMetadata(false, OnIsItemClickToSelectedChanged));
 
         public static bool GetIsItemClickToSelected(DependencyObject d)
         {

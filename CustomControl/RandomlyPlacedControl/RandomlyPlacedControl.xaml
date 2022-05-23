@@ -24,10 +24,10 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                          local:ItemsControlHelp.FirstItemMargin="10,4" local:ItemsControlHelp.ItemMargin="10,0,10,4"
-                                          local:ItemsControlHelp.ItemHeight="28" local:ItemsControlHelp.ItemBorderCornerRadius="4"
-                                          local:ItemsControlHelp.ItemBorderThickness="0.6" local:ItemsControlHelp.ItemBorderBrush="{TemplateBinding BorderBrush}"
-                                          local:ItemsControlHelp.IsItemClickToSelected="True"
+                                          local:ItemsControlAttachedProperty.FirstItemMargin="10,4" local:ItemsControlAttachedProperty.ItemMargin="10,0,10,4"
+                                          local:ItemsControlAttachedProperty.ItemHeight="28" local:ItemsControlAttachedProperty.ItemBorderCornerRadius="4"
+                                          local:ItemsControlAttachedProperty.ItemBorderThickness="0.6" local:ItemsControlAttachedProperty.ItemBorderBrush="{TemplateBinding BorderBrush}"
+                                          local:ItemsControlAttachedProperty.IsItemClickToSelected="True"
                                           ItemsSource="{TemplateBinding UseableSources}"
                                           SelectedItem="{Binding SelectedUseableItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
                                     <ListView.ItemTemplate>

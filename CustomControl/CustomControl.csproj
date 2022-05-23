@@ -57,8 +57,8 @@
     <Compile Include="Converter\FilePathToBitmapImage.cs" />
     <Compile Include="Converter\IsFirstItemInItemsControl.cs" />
     <Compile Include="Converter\XConverter.cs" />
-    <Compile Include="Help\ControlScrollHelp.cs" />
-    <Compile Include="Help\ItemsControlHelp.cs" />
+    <Compile Include="AttachedProperty\ControlScrollAttachedProperty.cs" />
+    <Compile Include="AttachedProperty\ItemsControlAttachedProperty.cs" />
     <Compile Include="MoveThumb.xaml.cs">
       <DependentUpon>MoveThumb.xaml</DependentUpon>
     </Compile>
@@ -81,6 +81,9 @@
     <Compile Include="RandomlyPlacedControl\RandomlyPlacedControlContentTemplateSelector.xaml.cs">
       <DependentUpon>RandomlyPlacedControlContentTemplateSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RandomlyPlacedControl\RandomlyPlacedControlPropertyTemplateSelector.xaml.cs">
+      <DependentUpon>RandomlyPlacedControlPropertyTemplateSelector.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -90,9 +93,14 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resource\iconfont.ttf" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="FIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ListViewDic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +114,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RandomlyPlacedControl\RandomlyPlacedControlContentTemplateSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RandomlyPlacedControl\RandomlyPlacedControlPropertyTemplateSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TextBoxDic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

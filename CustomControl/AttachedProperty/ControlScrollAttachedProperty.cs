@@ -4,7 +4,7 @@ using System.Windows.Media;
 
 namespace CustomControl
 {
-    public class ControlScrollHelp
+    public class ControlScrollAttachedProperty
     {
         private static ScrollViewer selectedScrol = null;
         private static bool IsMouseDown = false;
@@ -12,7 +12,7 @@ namespace CustomControl
 
         #region LeftMouseButtonScrollEnabled（给样式里滚动条嵌内容的控件增加左键滑动滚动条,不想通过点击滚动条时使用）
         public static readonly DependencyProperty LeftMouseButtonScrollEnabledProperty =
-            DependencyProperty.RegisterAttached("LeftMouseButtonScrollEnabled", typeof(bool), typeof(ControlScrollHelp),
+            DependencyProperty.RegisterAttached("LeftMouseButtonScrollEnabled", typeof(bool), typeof(ControlScrollAttachedProperty),
                 new FrameworkPropertyMetadata(false, OnLeftMouseButtonScrollEnabledChanged));
 
         public static bool GetLeftMouseButtonScrollEnabled(DependencyObject d)
