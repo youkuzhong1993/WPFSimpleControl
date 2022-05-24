@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:CustomControl">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/TextBoxDic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <DataTemplate x:Key="RPCTextBlockPropertyDataTemplate">
         <Grid>
             <Grid.RowDefinitions>
@@ -23,11 +27,23 @@
     </DataTemplate>
 
     <DataTemplate x:Key="RPCImagePropertyDataTemplate">
-        <Border Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RandomlyPlacedControl}}}">
-            <Image Source="{Binding ImagePath, Converter={x:Static local:XConverter.FilePathToBitmapImage}}"/>
-        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Text="图片路径:"/>
+            <TextBox Style="{StaticResource openFileTextBox}" Grid.Row="0" Grid.Column="2" VerticalContentAlignment="Center"
+                     Padding="6,0" Text="{Binding ImagePath, Mode=TwoWay}"/>
+        </Grid>
     </DataTemplate>
     
-    <local:RandomlyPlacedControlPropertyTemplateSelector x:Key="RPCPropertyTmeplateSelector"/>
-
+    <local:RandomlyPlacedControlPropertyTemplateSelector x:Key="RPCPropertyTmeplateSelector"
+                                                         TextBlockDataTemplate="{StaticResource RPCTextBlockPropertyDataTemplate}"
+                                                         ImageDataTemplate="{StaticResource RPCImagePropertyDataTemplate}"/>
 </ResourceDictionary>

@@ -10,24 +10,24 @@
                 <ControlTemplate TargetType="{x:Type ListViewItem}">
                     <Border x:Name="bg" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             Background="{TemplateBinding Background}"
-                            BorderThickness="{Binding Path=(local:ItemsControlHelp.ItemBorderThickness), RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}"
-                            BorderBrush="{Binding Path=(local:ItemsControlHelp.ItemBorderBrush), RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}"
-                            CornerRadius="{Binding Path=(local:ItemsControlHelp.ItemBorderCornerRadius), RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}"
-                            Width="{Binding Path=(local:ItemsControlHelp.ItemWidth), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"
-                            Height="{Binding Path=(local:ItemsControlHelp.ItemHeight), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}">
+                            BorderThickness="{Binding Path=(local:ItemsControlAttachedProperty.ItemBorderThickness), RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}"
+                            BorderBrush="{Binding Path=(local:ItemsControlAttachedProperty.ItemBorderBrush), RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}"
+                            CornerRadius="{Binding Path=(local:ItemsControlAttachedProperty.ItemBorderCornerRadius), RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListView}}}"
+                            Width="{Binding Path=(local:ItemsControlAttachedProperty.ItemWidth), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"
+                            Height="{Binding Path=(local:ItemsControlAttachedProperty.ItemHeight), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}">
                         <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" TargetName="bg" Value="{Binding Path=(local:ItemsControlHelp.ItemSelectedBrush), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
+                            <Setter Property="Background" TargetName="bg" Value="{Binding Path=(local:ItemsControlAttachedProperty.ItemSelectedBrush), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
                         </Trigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Converter={x:Static local:XConverter.IsFirstItemInItemsControl}}" Value="true">
-                            <Setter Property="Margin" TargetName="bg" Value="{Binding Path=(local:ItemsControlHelp.FirstItemMargin), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
+                            <Setter Property="Margin" TargetName="bg" Value="{Binding Path=(local:ItemsControlAttachedProperty.FirstItemMargin), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Converter={x:Static local:XConverter.IsFirstItemInItemsControl}}" Value="false">
-                            <Setter Property="Margin" TargetName="bg" Value="{Binding Path=(local:ItemsControlHelp.ItemMargin), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
+                            <Setter Property="Margin" TargetName="bg" Value="{Binding Path=(local:ItemsControlAttachedProperty.ItemMargin), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}}"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

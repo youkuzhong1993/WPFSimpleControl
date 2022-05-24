@@ -38,6 +38,22 @@ namespace ControlLib.RandomlyPlacedControl
         /// </summary>
         public float ThirdRow { get; set; } = 1;
 
+        #region IsSelected
+        private bool _isSelected;
+        /// <summary>
+        /// 是否选择
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
         #region PanelZIndex
         private int _panelZIndex = 0;
         /// <summary>
@@ -73,7 +89,17 @@ namespace ControlLib.RandomlyPlacedControl
 
         public RandomlyPlacedControlBase()
         {
+            IsSelected = false;
+        }
 
+        public float AllColWidth()
+        {
+            return FirstCol + SecondCol + ThirdCol;
+        }
+
+        public float AllRowHeight()
+        {
+            return FirstRow + SecondRow + ThirdRow;
         }
     }
 }

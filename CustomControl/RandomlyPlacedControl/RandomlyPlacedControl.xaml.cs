@@ -107,6 +107,36 @@ namespace CustomControl
             set { SetValue(UseablePopupPlacementRectangleProperty, value); }
         }
         #endregion
+
+        #region SelectedRandomlyPlacedControlBase
+        public static readonly DependencyProperty SelectedRandomlyPlacedControlBaseProperty =
+            DependencyProperty.Register("SelectedRandomlyPlacedControlBase", typeof(RandomlyPlacedControlBase), typeof(RandomlyPlacedControl),
+                new PropertyMetadata(null, OnSelectedRandomlyPlacedControlBaseChanged));
+
+        public RandomlyPlacedControlBase SelectedRandomlyPlacedControlBase
+        {
+            get { return (RandomlyPlacedControlBase)GetValue(SelectedRandomlyPlacedControlBaseProperty); }
+            set { SetValue(SelectedRandomlyPlacedControlBaseProperty, value); }
+        }
+
+        private static void OnSelectedRandomlyPlacedControlBaseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if(d == null)
+            {
+                return;
+            }
+
+            if(e.OldValue != null)
+            {
+                (e.OldValue as RandomlyPlacedControlBase).IsSelected = false;
+            }
+
+            if(e.NewValue != null)
+            {
+                (e.NewValue as RandomlyPlacedControlBase).IsSelected = true;
+            }
+        }
+        #endregion
         #endregion
 
         public RandomlyPlacedControl()
@@ -383,7 +413,13 @@ namespace CustomControl
             }
 
             SelectedGrid = GetGridFromDependecyObject(e.OriginalSource as DependencyObject);
-            IsMouseDownSelctedGrid = SelectedGrid != null;
+            if (SelectedGrid != null
+                && SelectedGrid.RowDefinitions.Count == 3
+                && SelectedGrid.ColumnDefinitions.Count == 3)
+            {
+                SelectedRandomlyPlacedControlBase = SelectedGrid.DataContext as RandomlyPlacedControlBase;
+                IsMouseDownSelctedGrid = true;
+            }
             MouseDownPoint = e.GetPosition(this);
         }
         #endregion
@@ -403,8 +439,9 @@ namespace CustomControl
             if (IsMouseDownSelctedGrid)
             {
                 Point p = e.GetPosition(this);
-                double x = p.X - MouseDownPoint.X;
-                double y = p.Y - MouseDownPoint.Y;
+                double x = (p.X - MouseDownPoint.X)/ SelectedGrid.ActualWidth * SelectedRandomlyPlacedControlBase.AllColWidth();
+                double y = (p.Y - MouseDownPoint.Y) / SelectedGrid.ActualHeight * SelectedRandomlyPlacedControlBase.AllRowHeight();              
+
                 x = x <= 0 ? Math.Max(-SelectedGrid.ColumnDefinitions[0].Width.Value, x) : Math.Min(SelectedGrid.ColumnDefinitions[2].Width.Value, x);
                 y = y <= 0 ? Math.Max(-SelectedGrid.RowDefinitions[0].Height.Value, y) : Math.Min(SelectedGrid.RowDefinitions[2].Height.Value, y);
                 SelectedGrid.ColumnDefinitions[0].Width = new GridLength(SelectedGrid.ColumnDefinitions[0].Width.Value + x, GridUnitType.Star);
@@ -446,6 +483,7 @@ namespace CustomControl
                     ItemsSources.Add(randomlyPlacedControlBase);
                     randomlyPlacedControlBase.PanelZIndex = ItemsSources.Count - 1;
                     DisplayGrid.Children.Add(GetGrid(randomlyPlacedControlBase, point, true));
+                    SelectedRandomlyPlacedControlBase = randomlyPlacedControlBase;
                 }
             }
 

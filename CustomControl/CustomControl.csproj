@@ -54,6 +54,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachedProperty\ButtonAttachedProperty.cs" />
+    <Compile Include="AttachedProperty\ControlAttachedProperty.cs" />
+    <Compile Include="ClipBorder\ClipBorder.cs" />
+    <Compile Include="ClipBorder\Utils.cs" />
     <Compile Include="Converter\FilePathToBitmapImage.cs" />
     <Compile Include="Converter\IsFirstItemInItemsControl.cs" />
     <Compile Include="Converter\XConverter.cs" />

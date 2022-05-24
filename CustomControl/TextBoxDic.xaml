@@ -1,14 +1,41 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:CustomControl">
-    <Style TargetType="{x:Type TextBox}">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/FIcon.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style x:Key="defautlTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="local:ControlAttachedProperty.CornerRadius" Value="4"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border x:Name="bd" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Background="{TemplateBinding Background}"
-                            />
+                            BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                            CornerRadius="{Binding Path=(local:ControlAttachedProperty.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollViewer x:Name="PART_ContentHost" Grid.Column="0" Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            <ContentPresenter Grid.Column="1" VerticalAlignment="Stretch" Content="{Binding Path=(local:ControlAttachedProperty.AppendContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="openFileTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource defautlTextBox}">
+        <Setter Property="local:ControlAttachedProperty.AppendContent">
+            <Setter.Value>
+                <Button Style="{StaticResource FIconButton}" Content="&#xe600;"
+                        local:ControlAttachedProperty.OpenFileDialogEnabled="True" Command="local:ControlAttachedProperty.openFileCommand"
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBox}}}"/>
             </Setter.Value>
         </Setter>
     </Style>

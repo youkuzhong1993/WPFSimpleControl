@@ -1,12 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:CustomControl">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/FIcon.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/RandomlyPlacedControl/RandomlyPlacedControlPropertyTemplateSelector.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type local:RandomlyPlacedControl}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="#AAAAAA"/>
         <Setter Property="Background" Value="White"/><!--不设置点击事件不触发，改hook忽略-->
+        <Setter Property="local:ControlAttachedProperty.CornerRadius" Value="4"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:RandomlyPlacedControl}">
@@ -18,32 +23,83 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Width="120">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                          local:ItemsControlAttachedProperty.FirstItemMargin="10,4" local:ItemsControlAttachedProperty.ItemMargin="10,0,10,4"
-                                          local:ItemsControlAttachedProperty.ItemHeight="28" local:ItemsControlAttachedProperty.ItemBorderCornerRadius="4"
-                                          local:ItemsControlAttachedProperty.ItemBorderThickness="0.6" local:ItemsControlAttachedProperty.ItemBorderBrush="{TemplateBinding BorderBrush}"
-                                          local:ItemsControlAttachedProperty.IsItemClickToSelected="True"
-                                          ItemsSource="{TemplateBinding UseableSources}"
-                                          SelectedItem="{Binding SelectedUseableItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding ControlName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                                <Popup Placement="RelativePoint" IsOpen="{TemplateBinding IsDisplayUseablePopup}" PlacementRectangle="{TemplateBinding UseablePopupPlacementRectangle}">
-                                    <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Width="5" Height="5"/>
-                                </Popup>
+                            <local:ClipBorder x:Name="leftGrid" Grid.Column="0" Width="0" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                              CornerRadius="{TemplateBinding local:ControlAttachedProperty.CornerRadius}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <ListView BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                              local:ItemsControlAttachedProperty.FirstItemMargin="10,4" local:ItemsControlAttachedProperty.ItemMargin="10,0,10,4"
+                                              local:ItemsControlAttachedProperty.ItemHeight="28" local:ItemsControlAttachedProperty.ItemBorderCornerRadius="4"
+                                              local:ItemsControlAttachedProperty.ItemBorderThickness="0.6" local:ItemsControlAttachedProperty.ItemBorderBrush="{TemplateBinding BorderBrush}"
+                                              local:ItemsControlAttachedProperty.IsItemClickToSelected="True" ItemsSource="{TemplateBinding UseableSources}"
+                                              SelectedItem="{Binding SelectedUseableItem, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ControlName}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                    <Popup Placement="RelativePoint" IsOpen="{TemplateBinding IsDisplayUseablePopup}" PlacementRectangle="{TemplateBinding UseablePopupPlacementRectangle}">
+                                        <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Width="5" Height="5"/>
+                                    </Popup>
+                                </Grid>
+                            </local:ClipBorder>
+
+                            <Grid Grid.Column="1">
+                                <ToggleButton x:Name="left" Style="{StaticResource FIconToggleButton}" local:ControlAttachedProperty.FIcon="&#xeb93;" Foreground="{TemplateBinding Foreground}"
+                                              VerticalAlignment="Center" HorizontalAlignment="Left" Panel.ZIndex="1" IsChecked="True"
+                                              local:ControlAttachedProperty.CheckedFIcon="&#xeb94;" local:ControlAttachedProperty.CheckedForeground="{TemplateBinding Foreground}"/>
+                                <ContentPresenter Content="{TemplateBinding DisplayGrid}" Panel.ZIndex="0"/>
+                                <ToggleButton x:Name="right" Style="{StaticResource FIconToggleButton}" local:ControlAttachedProperty.FIcon="&#xeb94;" Foreground="{TemplateBinding Foreground}"
+                                              VerticalAlignment="Center" HorizontalAlignment="Right" Panel.ZIndex="1" IsChecked="True"
+                                              local:ControlAttachedProperty.CheckedFIcon="&#xeb93;" local:ControlAttachedProperty.CheckedForeground="{TemplateBinding Foreground}"/>
                             </Grid>
-                            
-                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding DisplayGrid}"/>
+
+                            <local:ClipBorder x:Name="rightGird" Grid.Column="2" Width="0" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                              CornerRadius="{TemplateBinding local:ControlAttachedProperty.CornerRadius}">
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                    <ContentControl Margin="4" Content="{TemplateBinding SelectedRandomlyPlacedControlBase}" ContentTemplateSelector="{StaticResource RPCPropertyTmeplateSelector}"/>
+                                </ScrollViewer>
+                            </local:ClipBorder>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=left}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="leftGrid" Storyboard.TargetProperty="Width" To="120" Duration="0:0:0.4"/>
+                                    </Storyboard>
+                                </BeginStoryboard>                                
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="leftGrid" Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.4"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=right}" Value="True">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="rightGird" Storyboard.TargetProperty="Width" To="200" Duration="0:0:0.4"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="rightGird" Storyboard.TargetProperty="Width" To="0" Duration="0:0:0.4"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

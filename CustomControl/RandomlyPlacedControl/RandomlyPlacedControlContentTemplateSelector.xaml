@@ -2,15 +2,27 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:CustomControl">
     <DataTemplate x:Key="RPCTextBlockDataTemplate">
-        <Border Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RandomlyPlacedControl}}}">
+        <local:ClipBorder x:Name="border" Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RandomlyPlacedControl}}}">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Text}" FontSize="{Binding FontSize}"/>
-        </Border>
+        </local:ClipBorder>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="Red"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
     <DataTemplate x:Key="RPCImageDataTemplate">
-        <Border Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RandomlyPlacedControl}}}">
+        <local:ClipBorder x:Name="border" Background="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RandomlyPlacedControl}}}">
             <Image Source="{Binding ImagePath, Converter={x:Static local:XConverter.FilePathToBitmapImage}}"/>
-        </Border>
+        </local:ClipBorder>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsSelected}" Value="true">
+                <Setter Property="BorderThickness" TargetName="border" Value="2"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="Red"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
     
     <local:RandomlyPlacedControlContentTemplateSelector x:Key="RPCContentTmeplateSelector"

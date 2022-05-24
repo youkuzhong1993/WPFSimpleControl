@@ -3,7 +3,9 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/CustomControl;component/RandomlyPlacedControl/RandomlyPlacedControl.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/CustomControl;component/RandomlyPlacedControl/RandomlyPlacedControlContentTemplateSelector.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/FIcon.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/CustomControl;component/ListViewDic.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/TextBoxDic.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/CustomControl;component/MoveThumb.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
