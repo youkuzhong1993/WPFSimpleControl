@@ -14,19 +14,30 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="local:ControlAttachedProperty.CornerRadius" Value="4"/>
+        <Setter Property="local:ControlAttachedProperty.ControlTemplateNoBorder" Value="False"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource buttonBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource buttonBackgorund}"/>
+        <Setter Property="local:ButtonAttachedProperty.MouseOverBorderBrush" Value="{DynamicResource buttonMouseOverBorderBrush}"/>
+        <Setter Property="local:ButtonAttachedProperty.MouseOverBackground" Value="{DynamicResource buttonMouseOverBackground}"/>
+        <Setter Property="local:ButtonAttachedProperty.PressedBorderBrush" Value="{DynamicResource buttonPressedBorderBrush}"/>
+        <Setter Property="local:ButtonAttachedProperty.PressedBackground" Value="{DynamicResource buttonPressedBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Background="{TemplateBinding Background}"
+                    <Grid>
+                        <Border x:Name="border" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                             CornerRadius="{TemplateBinding local:ControlAttachedProperty.CornerRadius}">
-                        <TextBlock Style="{StaticResource FIcon}" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                            <TextBlock x:Name="FIcon" Style="{StaticResource FIcon}" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding FontSize}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </Border>
+                        <TextBlock x:Name="onlyFIcon" Style="{StaticResource FIcon}" Visibility="Collapsed"
+                                   Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
                                    FontSize="{TemplateBinding FontSize}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                    </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="border" Value="{Binding Path=(local:ButtonAttachedProperty.PressedBackground), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
@@ -36,6 +47,10 @@
                             <Setter Property="Background" TargetName="border" Value="{Binding Path=(local:ButtonAttachedProperty.MouseOverBackground), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{Binding Path=(local:ButtonAttachedProperty.MouseOverBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
+                        <DataTrigger Binding="{Binding Path=(local:ControlAttachedProperty.ControlTemplateNoBorder), RelativeSource={RelativeSource Mode=Self}}" Value="true">
+                            <Setter Property="Visibility" TargetName="border" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="onlyFIcon" Value="Visible"/>
+                        </DataTrigger> 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -63,7 +78,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Text" TargetName="txt" Value="{Binding Path=(local:ControlAttachedProperty.CheckedFIcon), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=(local:ControlAttachedProperty.CheckedForeground), RelativeSource={RelativeSource  Mode=TemplatedParent}}"/>
+                            <Setter Property="Foreground" TargetName="txt" Value="{Binding Path=(local:ControlAttachedProperty.CheckedFIconBrush), RelativeSource={RelativeSource  Mode=TemplatedParent}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

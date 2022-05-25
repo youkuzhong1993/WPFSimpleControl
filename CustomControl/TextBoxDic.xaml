@@ -9,6 +9,8 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="local:ControlAttachedProperty.CornerRadius" Value="4"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource borderThickness}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource borderBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -33,7 +35,7 @@
     <Style x:Key="openFileTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource defautlTextBox}">
         <Setter Property="local:ControlAttachedProperty.AppendContent">
             <Setter.Value>
-                <Button Style="{StaticResource FIconButton}" Content="&#xe600;"
+                <Button Style="{StaticResource FIconButton}" Content="&#xe600;" local:ControlAttachedProperty.ControlTemplateNoBorder="True"
                         local:ControlAttachedProperty.OpenFileDialogEnabled="True" Command="local:ControlAttachedProperty.openFileCommand"
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TextBox}}}"/>
             </Setter.Value>

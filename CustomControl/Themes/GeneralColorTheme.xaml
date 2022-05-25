@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Thickness x:Key="borderThickness">1</Thickness>
+    <SolidColorBrush x:Key="borderBrush" Color="Black"/>
+
+    <SolidColorBrush x:Key="buttonBorderBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="buttonBackground" Color="White"/>
+    <SolidColorBrush x:Key="buttonMouseOverBorderBrush" Color="#FFF7F0CD"/>
+    <LinearGradientBrush x:Key="buttonMouseOverBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFF5F2B8" Offset="0"/>
+        <GradientStop Color="#FFF5ED61" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="buttonPressedBorderBrush" Color="#FFD5FBF8"/>
+    <LinearGradientBrush x:Key="buttonPressedBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFE3F9F7" Offset="0"/>
+        <GradientStop Color="#FF8BF9EA" Offset="1"/>
+    </LinearGradientBrush>
+</ResourceDictionary>

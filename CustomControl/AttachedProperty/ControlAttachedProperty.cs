@@ -136,18 +136,33 @@ namespace CustomControl
         }
         #endregion
 
-        #region CheckedForeground
-        public static readonly DependencyProperty CheckedForegroundProperty =
-            DependencyProperty.RegisterAttached("CheckedForeground", typeof(Brush), typeof(ControlAttachedProperty), new FrameworkPropertyMetadata(Brushes.Transparent));
+        #region CheckedFIconBrush
+        public static readonly DependencyProperty CheckedFIconBrushProperty =
+            DependencyProperty.RegisterAttached("CheckedFIconBrush", typeof(Brush), typeof(ControlAttachedProperty), new FrameworkPropertyMetadata(Brushes.Transparent));
 
-        public static Brush GetCheckedForeground(DependencyObject d)
+        public static Brush GetCheckedFIconBrush(DependencyObject d)
         {
-            return (Brush)d.GetValue(CheckedForegroundProperty);
+            return (Brush)d.GetValue(CheckedFIconBrushProperty);
         }
 
-        public static void SetCheckedForeground(DependencyObject d, Brush value)
+        public static void SetCheckedFIconBrush(DependencyObject d, Brush value)
         {
-            d.SetValue(CheckedForegroundProperty, value);
+            d.SetValue(CheckedFIconBrushProperty, value);
+        }
+        #endregion
+
+        #region ControlTemplateNoBorder
+        public static readonly DependencyProperty ControlTemplateNoBorderProperty =
+            DependencyProperty.RegisterAttached("ControlTemplateNoBorder", typeof(bool), typeof(ControlAttachedProperty), new PropertyMetadata(false));
+
+        public static bool GetControlTemplateNoBorder(DependencyObject d)
+        {
+            return (bool)d.GetValue(ControlTemplateNoBorderProperty);
+        }
+
+        public static void SetControlTemplateNoBorder(DependencyObject d, bool value)
+        {
+            d.SetValue(ControlTemplateNoBorderProperty, value);
         }
         #endregion
 

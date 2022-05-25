@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Width="80" Height="20" Click="Button_Click"/>
+            <control:TimePicker Width="70"/>
         </StackPanel>
         <control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1"/>
         <RichTextBox x:Name="rtb" IsReadOnly="True" Visibility="Collapsed"

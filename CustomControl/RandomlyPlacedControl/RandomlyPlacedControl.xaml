@@ -8,8 +8,8 @@
     <Style TargetType="{x:Type local:RandomlyPlacedControl}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#AAAAAA"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource borderThickness}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource borderBrush}"/>
         <Setter Property="Background" Value="White"/><!--不设置点击事件不触发，改hook忽略-->
         <Setter Property="local:ControlAttachedProperty.CornerRadius" Value="4"/>
         <Setter Property="Template">
@@ -51,11 +51,11 @@
                             <Grid Grid.Column="1">
                                 <ToggleButton x:Name="left" Style="{StaticResource FIconToggleButton}" local:ControlAttachedProperty.FIcon="&#xeb93;" Foreground="{TemplateBinding Foreground}"
                                               VerticalAlignment="Center" HorizontalAlignment="Left" Panel.ZIndex="1" IsChecked="True"
-                                              local:ControlAttachedProperty.CheckedFIcon="&#xeb94;" local:ControlAttachedProperty.CheckedForeground="{TemplateBinding Foreground}"/>
+                                              local:ControlAttachedProperty.CheckedFIcon="&#xeb94;" local:ControlAttachedProperty.CheckedFIconBrush="{TemplateBinding Foreground}"/>
                                 <ContentPresenter Content="{TemplateBinding DisplayGrid}" Panel.ZIndex="0"/>
                                 <ToggleButton x:Name="right" Style="{StaticResource FIconToggleButton}" local:ControlAttachedProperty.FIcon="&#xeb94;" Foreground="{TemplateBinding Foreground}"
                                               VerticalAlignment="Center" HorizontalAlignment="Right" Panel.ZIndex="1" IsChecked="True"
-                                              local:ControlAttachedProperty.CheckedFIcon="&#xeb93;" local:ControlAttachedProperty.CheckedForeground="{TemplateBinding Foreground}"/>
+                                              local:ControlAttachedProperty.CheckedFIcon="&#xeb93;" local:ControlAttachedProperty.CheckedFIconBrush="{TemplateBinding Foreground}"/>
                             </Grid>
 
                             <local:ClipBorder x:Name="rightGird" Grid.Column="2" Width="0" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"

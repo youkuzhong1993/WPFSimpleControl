@@ -7,5 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/CustomControl;component/ListViewDic.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/CustomControl;component/TextBoxDic.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/CustomControl;component/MoveThumb.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/TimePicker.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/CustomControl;component/NumericUpDown.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
