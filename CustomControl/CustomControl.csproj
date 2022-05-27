@@ -60,9 +60,16 @@
     <Compile Include="ClipBorder\Utils.cs" />
     <Compile Include="Converter\FilePathToBitmapImage.cs" />
     <Compile Include="Converter\IsFirstItemInItemsControl.cs" />
+    <Compile Include="Converter\StringIsNullOrEmptyConverter.cs" />
     <Compile Include="Converter\XConverter.cs" />
     <Compile Include="AttachedProperty\ControlScrollAttachedProperty.cs" />
     <Compile Include="AttachedProperty\ItemsControlAttachedProperty.cs" />
+    <Compile Include="FlowChart\FlowChart.xaml.cs">
+      <DependentUpon>FlowChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlowChart\FlowChartNode.xaml.cs">
+      <DependentUpon>FlowChartNode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MoveThumb.xaml.cs">
       <DependentUpon>MoveThumb.xaml</DependentUpon>
     </Compile>
@@ -108,6 +115,14 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="FIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlowChart\FlowChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FlowChart\FlowChartNode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -31,6 +31,10 @@ namespace CustomControl
         {
             get { return Singleton<IsFirstItemInItemsControl>.GetInstance(); }
         }
-        
+
+        public static StringIsNullOrEmptyConverter StringIsNullOrEmptyConverter
+        {
+            get { return Singleton<StringIsNullOrEmptyConverter>.GetInstance(); }
+        }        
     }
 }

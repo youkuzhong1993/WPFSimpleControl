@@ -6,6 +6,7 @@ using System.Windows.Media;
 namespace CustomControl
 {
     /// <summary>
+    /// 此为开源MahApps.Metro代码
     /// Represents a border whose contents are clipped within the bounds
     /// of the border. The border may have rounded corners.
     /// </summary>
