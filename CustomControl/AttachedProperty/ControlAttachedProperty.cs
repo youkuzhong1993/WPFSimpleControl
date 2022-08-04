@@ -8,6 +8,36 @@ namespace CustomControl
 {
     public class ControlAttachedProperty
     {
+        #region WaterMark
+        public static readonly DependencyProperty WaterMarkProperty =
+            DependencyProperty.RegisterAttached("WaterMark", typeof(string), typeof(ControlAttachedProperty), new PropertyMetadata(string.Empty));
+
+        public static string GetWaterMark(DependencyObject d)
+        {
+            return (string)d.GetValue(WaterMarkProperty);
+        }
+
+        public static void SetWaterMark(DependencyObject d, string value)
+        {
+            d.SetValue(WaterMarkProperty, value);
+        }
+        #endregion
+
+        #region WaterMarkBrush
+        public static readonly DependencyProperty WaterMarkBrushProperty =
+            DependencyProperty.RegisterAttached("WaterMarkBrush", typeof(Brush), typeof(ControlAttachedProperty), new PropertyMetadata(Brushes.Transparent));
+
+        public static Brush GetWaterMarkBrush(DependencyObject d)
+        {
+            return (Brush)d.GetValue(WaterMarkBrushProperty);
+        }
+
+        public static void SetWaterMarkBrush(DependencyObject d, Brush value)
+        {
+            d.SetValue(WaterMarkBrushProperty, value);
+        }
+        #endregion
+
         #region CornerRadius
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.RegisterAttached("CornerRadius", typeof(CornerRadius), typeof(ControlAttachedProperty), new PropertyMetadata(new CornerRadius()));

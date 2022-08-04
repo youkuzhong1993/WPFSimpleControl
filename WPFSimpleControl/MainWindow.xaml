@@ -7,22 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <Grid Visibility="Collapsed">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <Button Width="80" Height="20" Click="Button_Click"/>
-                <control:TimePicker Width="70"/>
             </StackPanel>
             <control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1"/>
-            <RichTextBox x:Name="rtb" IsReadOnly="True" Visibility="Collapsed"
-                     control:ControlScrollAttachedProperty.LeftMouseButtonScrollEnabled="true" Grid.Row="1"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White"/>
         </Grid>
-        <WrapPanel>
-            <Border Width="120" Height="30" Background="Yellow"/>
-        </WrapPanel>
     </Grid>
 </Window>
