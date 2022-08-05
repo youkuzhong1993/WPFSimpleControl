@@ -14,8 +14,9 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <Button Width="80" Height="20" Click="Button_Click"/>
+                <control:PasswordTextBox Width="120" Margin="10,0,0,0"/>
             </StackPanel>
-            <control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1"/>
+            <!--<control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1"/>-->
         </Grid>
     </Grid>
 </Window>
