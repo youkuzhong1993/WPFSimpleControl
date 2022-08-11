@@ -6,6 +6,9 @@
         xmlns:control="clr-namespace:CustomControl;assembly=CustomControl"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!--<control:BindingProxy x:Key="resetCommand" Data="{Binding ResetCommand}"/>-->
+    </Window.Resources>
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -13,7 +16,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <Button Width="80" Height="20" Click="Button_Click"/>
+                <!--<Button Width="80" Height="20" Click="Button_Click" Command="{Binding  Data,Source={StaticResource resetCommand}}"/>-->
                 <control:PasswordTextBox Width="120" Margin="10,0,0,0"/>
             </StackPanel>
             <!--<control:RandomlyPlacedControl x:Name="rpc" Grid.Row="1"/>-->

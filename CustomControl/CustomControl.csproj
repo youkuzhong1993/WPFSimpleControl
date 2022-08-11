@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="AttachedProperty\ButtonAttachedProperty.cs" />
     <Compile Include="AttachedProperty\ControlAttachedProperty.cs" />
+    <Compile Include="BindingProxy.cs" />
     <Compile Include="ClipBorder\ClipBorder.cs" />
     <Compile Include="ClipBorder\ClipBorder2.cs" />
     <Compile Include="ClipBorder\GeometryHelper.cs" />
